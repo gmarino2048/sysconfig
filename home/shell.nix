@@ -17,7 +17,14 @@
     oh-my-zsh = {
       enable = true;
       theme = "lukerandall";
-      plugins = [ "git" "direnv" "sudo" "macos" "extract" "colored-man-pages" ];
+      plugins = [
+        "git"
+        "direnv"
+        "sudo"
+        "macos"
+        "extract"
+        "colored-man-pages"
+      ];
     };
 
     shellAliases = {
@@ -30,11 +37,20 @@
   };
 
   # Modern shell kit.
-  programs.fzf = { enable = true; enableZshIntegration = true; };
-  programs.zoxide = { enable = true; enableZshIntegration = true; };
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   programs.eza.enable = true;
   programs.bat.enable = true;
 
   # Homebrew on PATH for all shells.
-  home.sessionPath = [ "/opt/homebrew/bin" "/opt/homebrew/sbin" ];
+  home.sessionPath = [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+  ];
 }

@@ -11,5 +11,8 @@
   };
 
   # Ergonomic disk-usage tools.
-  home.packages = [ pkgs.dust pkgs.duf ];
+  home.packages = [
+    pkgs.dust
+    pkgs.duf
+  ];
 }

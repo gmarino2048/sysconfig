@@ -1,5 +1,7 @@
 { pkgs, theme, ... }:
-let themes = import ../themes; in
+let
+  themes = import ../themes;
+in
 {
   home.packages = [ pkgs.nano ];
 
@@ -18,7 +20,11 @@ let themes = import ../themes; in
         indent-guides.render = true;
         soft-wrap.enable = true;
         lsp.display-messages = true;
-        cursor-shape = { insert = "bar"; normal = "block"; select = "underline"; };
+        cursor-shape = {
+          insert = "bar";
+          normal = "block";
+          select = "underline";
+        };
       };
     };
   };

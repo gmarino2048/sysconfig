@@ -1,4 +1,9 @@
-{ pkgs, inputs, theme, ... }:
+{
+  pkgs,
+  inputs,
+  theme,
+  ...
+}:
 {
   imports = [ ./brew.nix ];
 
@@ -21,16 +26,28 @@
       "--delete-older-than"
       "30d"
     ];
-    StartCalendarInterval = [ { Weekday = 0; Hour = 3; Minute = 0; } ];
+    StartCalendarInterval = [
+      {
+        Weekday = 0;
+        Hour = 3;
+        Minute = 0;
+      }
+    ];
     StandardOutPath = "/var/log/nix-gc.log";
     StandardErrorPath = "/var/log/nix-gc.log";
   };
 
   # Fira Code (ligatures) + Nerd Font glyphs, system-wide.
-  fonts.packages = [ pkgs.fira-code pkgs.nerd-fonts.fira-code ];
+  fonts.packages = [
+    pkgs.fira-code
+    pkgs.nerd-fonts.fira-code
+  ];
 
   # Fallback system build/debug toolchain.
-  environment.systemPackages = [ pkgs.llvm pkgs.lldb ];
+  environment.systemPackages = [
+    pkgs.llvm
+    pkgs.lldb
+  ];
 
   system.defaults = {
     NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true; # time-based dark mode

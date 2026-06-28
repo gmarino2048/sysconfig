@@ -1,4 +1,9 @@
-{ pkgs, config, theme, ... }:
+{
+  pkgs,
+  config,
+  theme,
+  ...
+}:
 let
   vt = (import ../themes).${theme}.vscode;
 
@@ -21,17 +26,19 @@ let
   };
 
   # nixpkgs builds for the ones with patched binaries; rest from the marketplace overlay.
-  extensions = (with pkgs.vscode-extensions; [
-    vadimcn.vscode-lldb # lldb debugger (patched adapter)
-    rust-lang.rust-analyzer
-  ]) ++ (with pkgs.vscode-marketplace; [
-    tamasfe.even-better-toml
-    yzhang.markdown-all-in-one
-    davidanson.vscode-markdownlint
-    anthropic.claude-code
-    andreilucaci.everforest-pro
-    arcticicestudio.nord-visual-studio-code
-  ]);
+  extensions =
+    (with pkgs.vscode-extensions; [
+      vadimcn.vscode-lldb # lldb debugger (patched adapter)
+      rust-lang.rust-analyzer
+    ])
+    ++ (with pkgs.vscode-marketplace; [
+      tamasfe.even-better-toml
+      yzhang.markdown-all-in-one
+      davidanson.vscode-markdownlint
+      anthropic.claude-code
+      andreilucaci.everforest-pro
+      arcticicestudio.nord-visual-studio-code
+    ]);
 in
 {
   programs.vscode = {
