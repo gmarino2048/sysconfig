@@ -15,6 +15,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    flake-utils = {
+      url = "github:numtide/flake-utils/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Makes nix-darwin coexist with the Determinate-managed Nix.
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
@@ -23,12 +28,61 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, nix-darwin, home-manager, determinate, nix-vscode-extensions }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nix-darwin,
+      home-manager,
+      flake-utils,
+      determinate,
+      nix-vscode-extensions,
+      treefmt-nix,
+    }:
     let
+      # Per-system devShell creator
+      mkEnv =
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
+          treefmt-config = treefmt-nix.lib.evalModule pkgs {
+            projectRootFile = "flake.nix";
+
+            programs.nixfmt.enable = true;
+            programs.nixfmt.package = pkgs.nixfmt-rfc-style; # Use standard
+          };
+        in
+        {
+          formatter = treefmt-config.config.build.wrapper;
+
+          devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              treefmt
+              nixfmt
+              statix
+              deadnix
+            ];
+          };
+        };
+
       # Per-machine builder; `theme` is the single per-machine theme switch.
-      mkDarwin = { system, host, theme }:
+      mkDarwin =
+        {
+          system,
+          host,
+          theme,
+        }:
         nix-darwin.lib.darwinSystem {
           inherit system;
           specialArgs = { inherit inputs theme; };
@@ -47,12 +101,6 @@
         host = "pegasus";
         theme = "forest";
       };
-
-      # `direnv` dev-shell for hacking on this repo.
-      devShells.aarch64-darwin.default =
-        let pkgs = import nixpkgs { system = "aarch64-darwin"; config.allowUnfree = true; };
-        in pkgs.mkShell {
-          packages = with pkgs; [ nixfmt-rfc-style nil statix deadnix ];
-        };
-    };
+    }
+    // flake-utils.lib.eachDefaultSystem mkEnv;
 }
