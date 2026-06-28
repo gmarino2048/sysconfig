@@ -46,10 +46,4 @@ in
       enableExtensionUpdateCheck = false;
     };
   };
-
-  # Insiders (Homebrew binary) reuses the same read-only settings + nix-managed extensions.
-  home.file."Library/Application Support/Code - Insiders/User/settings.json".text =
-    builtins.toJSON userSettings;
-  home.file.".vscode-insiders/extensions".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.vscode/extensions";
 }

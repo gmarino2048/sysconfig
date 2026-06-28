@@ -14,7 +14,6 @@
       "google-chrome"
       "firefox"
       "ghostty"
-      "visual-studio-code@insiders" # stable VSCode comes from nix; Insiders self-updates here
     ];
   };
 }
