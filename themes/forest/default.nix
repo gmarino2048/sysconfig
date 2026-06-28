@@ -5,8 +5,8 @@
   zellij = "everforest";
   btop = "everforest";
   vscode = {
-    dark = "Everforest Dark";
-    light = "Everforest Light";
+    dark = "Everforest Pro Dark";
+    light = "Everforest Pro Light";
   };
 
   # Shared palette (drives ghostty, zellij, btop).

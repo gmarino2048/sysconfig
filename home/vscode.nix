@@ -29,7 +29,7 @@ let
     yzhang.markdown-all-in-one
     davidanson.vscode-markdownlint
     anthropic.claude-code
-    sainnhe.everforest
+    andreilucaci.everforest-pro
     arcticicestudio.nord-visual-studio-code
   ]);
 in
