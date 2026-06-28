@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./shell.nix
@@ -20,4 +20,8 @@
 
   # Screenshot target dir (system.defaults.screencapture.location).
   home.file."Pictures/screenshots/.keep".text = "";
+
+  home.packages = with pkgs; [
+    claude-code
+  ];
 }
