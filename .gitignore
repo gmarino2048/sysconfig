@@ -1,0 +1,5 @@
+# Build artifacts & local state — never keys (those live in ~/.ssh and ~/.gnupg).
+result
+result-*
+.direnv/
+.DS_Store

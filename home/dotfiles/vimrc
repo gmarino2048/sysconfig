@@ -1,0 +1,18 @@
+" Brief vim config: airline (git + lsp) + ALE.
+set nocompatible
+syntax on
+filetype plugin indent on
+set mouse=a hidden ignorecase smartcase termguicolors
+
+" Airline: git branch + ALE/LSP status in the statusline.
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'minimalist'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" ALE as LSP client + linter.
+let g:ale_completion_enabled = 1
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
