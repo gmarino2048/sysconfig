@@ -10,15 +10,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mac-app-util.url = "github:hraban/mac-app-util";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-utils = {
-      url = "github:numtide/flake-utils/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-utils.url = "github:numtide/flake-utils/main";
 
     # Makes nix-darwin coexist with the Determinate-managed Nix.
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
@@ -40,6 +39,7 @@
       self,
       nixpkgs,
       nix-darwin,
+      mac-app-util,
       home-manager,
       flake-utils,
       determinate,
