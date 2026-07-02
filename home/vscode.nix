@@ -32,6 +32,7 @@ let
       rust-lang.rust-analyzer
     ])
     ++ (with pkgs.vscode-marketplace; [
+      mkhl.direnv # load .envrc env so rust-analyzer finds the nix toolchain
       tamasfe.even-better-toml
       yzhang.markdown-all-in-one
       davidanson.vscode-markdownlint
